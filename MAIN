@@ -1,0 +1,51 @@
+
+local Lib=loadstring(game:HttpGet(('https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wall%20v3')))()
+local Win=Lib:CreateWindow("Crystal Client")
+local CrosshairFile=Win:CreateFolder("CustomCrosshairs")
+local Delete=Win:CreateFolder("Delete")
+
+local Plrs=game:GetService("Players")
+local Plr=Plrs.LocalPlayer
+local Char=Plr.Character
+if Char then
+Hum=Char.Humanoid
+Hrp=Char.HumanoidRootPart
+end
+local Ms=Plr:GetMouse()
+local CurrCam=workspace.CurrentCamera
+getgenv().CustomIcon=true
+getgenv().AutoPickUp=false
+local IconChanging=false
+local Id=0
+CrosshairFile:Button("Dot Crosshair",function()
+	Id=417446600
+		if getgenv().CustomIcon==true and Ms.Icon then
+			Ms.Icon="rbxassetid://"..Id
+		else
+			if Ms.Icon then
+				Ms.Icon=nil
+		end
+	end
+end)
+CrosshairFile:Button("Circle Crosshair",function()
+	Id=10393593823
+		if getgenv().CustomIcon==true and Ms.Icon then
+			Ms.Icon="rbxassetid://"..Id
+		else
+			if Ms.Icon then
+				Ms.Icon=nil
+		end
+	end
+end)
+CrosshairFile:Toggle("AutoPickUp",function(bool)
+Delete:DestroyGui()
+Ms:GetPropertyChangedSignal("Icon"):Connect(function()
+	if getgenv().CustomIcon==true and Ms.Icon and not IconChanging then
+		IconChanging=true
+		local ChangeIcon="rbxassetid://"..Id
+		if Ms.Icon~="rbxassetid://"..Id then
+			Ms.Icon=ChangeIcon
+		end
+		IconChanging=false
+	end
+end)
